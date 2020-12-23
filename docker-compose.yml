@@ -1,0 +1,23 @@
+version: "3.8"
+
+x-app: &default-app
+  environment:
+    - NODE_ENV=development
+  restart: always
+
+services:
+  lmu_backend:
+    build: "../ts-lmu-backend"
+    ports:
+      - "8080:8080"
+    env_file:
+      - "../ts-lmu-backend/.env"
+    <<: *default-app
+
+  lmu_frontend:
+    build: "../ts-lmu-frontend"
+    ports:
+      - "3000:3000"
+    env_file:
+      - "../ts-lmu-frontend/.env"
+    <<: *default-app
